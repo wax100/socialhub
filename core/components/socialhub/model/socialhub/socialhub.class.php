@@ -323,10 +323,11 @@ class SocialHub
 
         $facebookAppId     = $this->modx->getOption('socialhub.facebook_app_id');
         $facebookAppSecret = $this->modx->getOption('socialhub.facebook_app_secret');
+        $facebookToken = $this->modx->getOption('socialhub.facebook_token');
 
         /** Only import Facebook if PHP version is higher or equal to 5.4.0 */
         if (!version_compare(PHP_VERSION, '5.4.0', '<')) {
-            $this->importFacebook($facebookAppId, $facebookAppSecret);
+            $this->importFacebook($facebookAppId, $facebookAppSecret, $facebookToken);
         } elseif (!empty($facebookAppId) && !empty($facebookAppSecret)) {
             $this->log(
                 'Could not import Facebook posts because your PHP version does not
@@ -619,7 +620,7 @@ class SocialHub
     /**
      * Import Facebook feed.
      */
-    private function importFacebook($facebookAppId, $facebookAppSecret)
+    private function importFacebook($facebookAppId, $facebookAppSecret, $facebookToken)
     {
         $facebookPage = $this->modx->getOption('socialhub.facebook_page');
 
@@ -631,7 +632,11 @@ class SocialHub
             require_once $this->corePath . '/lib/facebook/autoload.php';
 
             FacebookSession::setDefaultApplication($facebookAppId, $facebookAppSecret);
-            $session = FacebookSession::newAppSession();
+            if(empty($facebookToken)){
+                $session = FacebookSession::newAppSession();
+            }else{
+                $session = new FacebookSession($facebookToken);
+            }
 
             try {
                 $session->validate();
@@ -644,7 +649,7 @@ class SocialHub
             $request = new FacebookRequest(
                 $session,
                 'GET',
-                '/' . $facebookPage . '/feed?fields=created_time,link,message,object_id,status_type,type,from'
+                '/' . $facebookPage . '/feed?fields=created_time,permalink_url,message,id,status_type,from,full_picture,attachments'
             );
 
             $response    = $request->execute();
@@ -677,12 +682,13 @@ class SocialHub
                     $username = (isset($post->from->name)) ? $post->from->name : $username;
                     $fullname = (isset($post->from->name)) ? $post->from->name : $username;
                     $date     = (isset($post->created_time)) ? strtotime($post->created_time) : time();
-                    $link     = (isset($post->link)) ? $post->link : 'https://www.facebook.com/' . $facebookPage;
+                    $link     = (isset($post->permalink_url)) ? $post->permalink_url : 'https://www.facebook.com/' . $facebookPage;
 
-                    $media = '';
+                    /*$media = '';
                     if (isset($post->status_type) && $post->status_type == 'added_photos') {
-                        $media = 'https://graph.facebook.com/' . $post->object_id . '/picture?type=normal';
-                    }
+                        $media = 'https://graph.facebook.com/' . $post->id . '/picture?type=normal';
+                    }*/
+                    $media = $post->full_picture;
 
                     $item = array(
                         'source'      => 'facebook',

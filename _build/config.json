@@ -3,7 +3,7 @@
     "lowCaseName": "socialhub",
     "description": "",
     "author": "Sterc",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "package":{
         "menus": [{
             "text": "socialhub.menu.socialhub"
@@ -63,6 +63,11 @@
             "value": ""
           }, {
             "key": "facebook_page",
+            "type": "textfield",
+            "area": "Facebook",
+            "value": ""
+          }, {
+            "key": "facebook_token",
             "type": "textfield",
             "area": "Facebook",
             "value": ""

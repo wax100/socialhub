@@ -69,7 +69,8 @@ https://developers.facebook.com.';
 $_lang['setting_socialhub.facebook_page']            = 'Facebook page';
 $_lang['setting_socialhub.facebook_page_desc']       = 'Enter Facebook page name, retrieved from Facebook page url.
 For example: sterc.internet.marketing. Retrieved from: https://www.facebook.com/sterc.internet.marketing.';
-
+$_lang['setting_socialhub.facebook_token']            = 'Facebook token';
+$_lang['setting_socialhub.facebook_page_desc']       = 'You can get token here: https://www.sociablekit.com/how-to-get-a-facebook-page-access-token/';
 /* Instagram. */
 $_lang['setting_socialhub.instagram_accesstoken']        = 'Instagram Access Token';
 $_lang['setting_socialhub.instagram_accesstoken_desc']   = 'The Instagram Access Token system setting will be
