@@ -29,7 +29,10 @@ After the authorization you will be redirected to the specified redirect URI and
 Since the Instagram Code can only be used once, it will automatically be unset after it has been used to retrieve the Access Token.
 
 **Note: Get Facebook Access Token**
-https://www.sociablekit.com/how-to-get-a-facebook-page-access-token/
+https://docs.google.com/document/d/1BWUBh008pvoI3ai6DZ1dABvxSYQqakuBirXwhJNOhuM/edit
+
+**Note: Get Instagram Access Token**
+https://developers.facebook.com/docs/instagram-basic-display-api/getting-started
 
 ## Cronjob ##
 The SocialHub cronjob imports the Social Feed from the social media accounts and store the data into the database.

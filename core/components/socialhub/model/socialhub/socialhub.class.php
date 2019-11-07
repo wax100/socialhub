@@ -315,7 +315,6 @@ class SocialHub
         $publicToken = $this->modx->getOption('socialhub.instagram_accesstoken');
         $tags = $this->modx->getOption('socialhub.instagram_search_query');
         $this->importInstagram($publicToken, $tags, '' );
-
         $this->importTwitter();
         $this->importYoutube();
 
@@ -528,8 +527,10 @@ class SocialHub
                 }
             }
         }else {
-            $instagramSearchUrl = 'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $token;
+            //$instagramSearchUrl = 'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $token;
+            $instagramSearchUrl = 'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=' . $token;
             $instagramUserPosts = file_get_contents($instagramSearchUrl);
+
             if ($instagramUserPosts) {
                 $instagramUserPosts = $this->modx->fromJSON($instagramUserPosts);
                 if (isset($instagramUserPosts['data'])) {
@@ -719,6 +720,7 @@ class SocialHub
      */
     private function importInstagramItem($post, $instagramUsername = '')
     {
+
         if (isset($post['id'])) {
             $avatar = '';
             if (isset($post['user']['profile_picture'])) {
@@ -726,34 +728,25 @@ class SocialHub
             }
 
             $username = '';
-            if (isset($post['user']['username'])) {
-                $username = utf8_decode($post['user']['username']);
+            if (isset($post['username'])) {
+                $username = utf8_decode($post['username']);
             }
 
-            $fullname = '';
-            if (isset($post['user']['full_name'])) {
-                $fullname = utf8_decode($post['user']['full_name']);
-            }
+            $fullname = $username;
 
-            $media = '';
-            if (isset($post['images']['standard_resolution']['url'])) {
-                $media = $post['images']['standard_resolution']['url'];
+            $media = $post['media_url'];
+            if($post['media_type'] == ''){
+                $media = $post['thumbnail_url'];
             }
-
-            $link = '';
-            if (isset($post['link'])) {
-                $link = $post['link'];
-            }
+            $link = $post['permalink'];
 
             $date = date('Y-m-d H:i:s');
-            if (isset($post['created_time'])) {
-                $date = date('Y-m-d H:i:s', $post['created_time']);
+            if (isset($post['timestamp'])) {
+                $d = strtotime($post['timestamp']);
+                $date = date('Y-m-d H:i:s', $d);
             }
 
-            $sourceType = 'mention';
-            if ($instagramUsername == $username) {
-                $sourceType = 'post';
-            }
+            $sourceType = $post['media_type'];
 
             $item = array(
                 'source'      => 'instagram',
@@ -863,10 +856,10 @@ class SocialHub
         }
 
         if ($source == 'instagram') {
-            if (!isset($item['caption']['text'])) {
+            if (!isset($item['caption'])) {
                 return '';
             }
-            $content = $item['caption']['text'];
+            $content = $item['caption'];
         }
 
         if ($source == 'facebook') {
