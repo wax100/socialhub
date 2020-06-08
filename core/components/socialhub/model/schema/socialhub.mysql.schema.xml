@@ -10,7 +10,7 @@
         <field key="username" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="fullname" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="content" dbtype="text" phptype="string" null="true" default="" />
-        <field key="image" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="image" dbtype="text" phptype="string" null="false" default="" />
         <field key="link" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="date" dbtype="timestamp" phptype="timestamp"/>
         <field key="active" dbtype="int" precision="1" phptype="boolean" null="false" default="0" />

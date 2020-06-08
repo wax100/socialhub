@@ -4,7 +4,7 @@ $xpdo_meta_map['SocialHubItem']= array (
   'version' => '0.1',
   'table' => 'socialhub_items',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'source' => '',
     'source_id' => NULL,
@@ -20,9 +20,9 @@ $xpdo_meta_map['SocialHubItem']= array (
     'active' => 0,
     'data' => NULL,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'source' => 
+    'source' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
@@ -30,28 +30,28 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => '',
     ),
-    'source_id' => 
+    'source_id' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'source_type' => 
+    'source_type' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
       'phptype' => 'string',
       'null' => false,
     ),
-    'language' => 
+    'language' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '50',
       'phptype' => 'string',
       'null' => false,
     ),
-    'avatar' => 
+    'avatar' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -59,7 +59,7 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => '',
     ),
-    'username' => 
+    'username' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -67,7 +67,7 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => '',
     ),
-    'fullname' => 
+    'fullname' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -75,14 +75,21 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => '',
     ),
-    'content' => 
+    'content' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
     ),
-    'image' => 
+    'image' =>
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'link' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -90,20 +97,12 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => '',
     ),
-    'link' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '255',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
-    ),
-    'date' => 
+    'date' =>
     array (
       'dbtype' => 'timestamp',
       'phptype' => 'timestamp',
     ),
-    'active' => 
+    'active' =>
     array (
       'dbtype' => 'int',
       'precision' => '1',
@@ -111,7 +110,7 @@ $xpdo_meta_map['SocialHubItem']= array (
       'null' => false,
       'default' => 0,
     ),
-    'data' => 
+    'data' =>
     array (
       'dbtype' => 'text',
       'phptype' => 'json',

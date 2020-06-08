@@ -285,8 +285,6 @@ class SocialHub
                         $clients[$key]['code'] = '';
                         $this->log($response['error_message'], 'error');
                         $this->log($fields['redirect_uri'], 'notice');
-
-
                     }
 
                     if (!isset($response['code']) && isset($response['access_token'])) {
@@ -314,7 +312,9 @@ class SocialHub
         /** Check if access token is already set, then import Instagram. */
         $publicToken = $this->modx->getOption('socialhub.instagram_accesstoken');
         $tags = $this->modx->getOption('socialhub.instagram_search_query');
-        $this->importInstagram($publicToken, $tags, '' );
+        $instagramUserId  = $this->modx->getOption('socialhub.instagram_user_id');
+        $this->importInstagram($instagramUserId, $publicToken, $tags, '' );
+
         $this->importTwitter();
         $this->importYoutube();
 
@@ -499,7 +499,7 @@ class SocialHub
     /**
      * Import Instagram feed.
      */
-    private function importInstagram($token, $tags, $instagramUsername)
+    private function importInstagram($userid, $token, $tags, $instagramUsername)
     {
         if (!isset($token) || empty($token)) {
             return false;
@@ -527,10 +527,13 @@ class SocialHub
                 }
             }
         }else {
-            //$instagramSearchUrl = 'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $token;
-            $instagramSearchUrl = 'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=' . $token;
+            //$instagramSearchUr= 'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $token;
+            if($userid == '') {
+                $instagramSearchUrl = 'https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=' . $token;
+            }else {
+                $instagramSearchUrl = 'https://graph.facebook.com/' . $userid . '/media/?fields=id,username,caption,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=' . $token;
+            }
             $instagramUserPosts = file_get_contents($instagramSearchUrl);
-
             if ($instagramUserPosts) {
                 $instagramUserPosts = $this->modx->fromJSON($instagramUserPosts);
                 if (isset($instagramUserPosts['data'])) {

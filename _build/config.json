@@ -3,7 +3,7 @@
     "lowCaseName": "socialhub",
     "description": "",
     "author": "Sterc",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "package":{
         "menus": [{
             "text": "socialhub.menu.socialhub"
@@ -93,6 +93,11 @@
             "value": ""
           }, {
             "key": "instagram_search_query",
+            "type": "textfield",
+            "area": "Instagram",
+            "value": ""
+          }, {
+            "key": "instagram_client_id",
             "type": "textfield",
             "area": "Instagram",
             "value": ""

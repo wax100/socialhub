@@ -96,8 +96,8 @@ $_lang['setting_socialhub.instagram_json']       = 'JSON String with userId, use
 $_lang['setting_socialhub.instagram_json_desc']  = 'Example: {"userid": {"username": "__username__", "tags": "__tags__"}}';
 
 
-//$_lang['setting_socialhub.instagram_user_id']            = 'Instagram User ID';
-//$_lang['setting_socialhub.instagram_user_id_desc']       = 'Enter your Instagram User ID.';
+$_lang['setting_socialhub.instagram_user_id']            = 'Instagram User ID';
+$_lang['setting_socialhub.instagram_user_id_desc']       = 'Enter your Instagram User from Facebook App.';
 //$_lang['setting_socialhub.instagram_username']           = 'Instagram Username';
 //$_lang['setting_socialhub.instagram_username_desc']      = 'Enter your Instagram username.';
 
