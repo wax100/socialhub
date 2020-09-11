@@ -645,8 +645,10 @@ class SocialHub
             try {
                 $session->validate();
             } catch (FacebookRequestException $ex) {
+                $this->log('Facebook: ' . $ex->getMessage(), 'error');
                 return;
             } catch (\Exception $ex) {
+                $this->log('Facebook: ' . $ex->getMessage(), 'error');
                 return;
             }
 
@@ -693,6 +695,10 @@ class SocialHub
                         $media = 'https://graph.facebook.com/' . $post->id . '/picture?type=normal';
                     }*/
                     $media = $post->full_picture;
+                    if($post->status_type == 'added_video'){
+                        $link = $post->attachments->data[0]->url;
+                        $media = '';
+                    }
 
                     $item = array(
                         'source'      => 'facebook',
@@ -867,9 +873,13 @@ class SocialHub
 
         if ($source == 'facebook') {
             if (!isset($item->message)) {
-                return '';
+                if(!isset($item->attachments->data[0]->description)){
+                    return '';
+                }
+                $content = $item->attachments->data[0]->description;
+            }else{
+                $content = $item->message;
             }
-            $content = $item->message;
         }
 
         if ($source == 'youtube') {
