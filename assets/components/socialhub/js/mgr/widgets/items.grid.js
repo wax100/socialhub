@@ -181,19 +181,19 @@ Ext.extend(SocialHub.grid.Items,MODx.grid.Grid,{
         }
 
       return tpl.apply(record.data);
-   }    
-   ,instaRender: function (value, metaData, record, rowIndex, colIndex, store) {
-        if(record.data.image.length == 0){
-            var tpl = new Ext.XTemplate('<tpl for=".">' + '<p>{content}</p>' + '</tpl>', {
-                compiled: true
-            });          
-        }
-        else {
-            var tpl = new Ext.XTemplate('<tpl for=".">' + '<img src="{image}" width="200"/><p>{content}</p>' + '</tpl>', {
-                compiled: true
-            });
+   }
+    ,instaRender: function (value, metaData, record, rowIndex, colIndex, store) {
+        var tpl = new Ext.XTemplate('<tpl for=".">' + '<p>{content}</p>' + '</tpl>', {
+            compiled: true
+        });
+        if(record.data.image != null  ) {
+            if (record.data.image.length > 0) {
+                var tpl = new Ext.XTemplate('<tpl for=".">' + '<img src="{image}" width="200"/><p>{content}</p>' + '</tpl>', {
+                    compiled: true
+                });
+            }
         }
         return tpl.apply(record.data);
-   },
+    },
 });
 Ext.reg('socialhub-grid-items',SocialHub.grid.Items);

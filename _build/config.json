@@ -3,7 +3,7 @@
     "lowCaseName": "socialhub",
     "description": "",
     "author": "Sterc",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "package":{
         "menus": [{
             "text": "socialhub.menu.socialhub"
@@ -17,6 +17,9 @@
             "snippets": [{
               "name": "SocialHub",
               "file": "socialhub.snippet.php"
+            },{
+              "name": "refreshToken",
+              "file": "refreshtoken.snippet.php"
             }],
             "chunks": [{
               "name": "socialhubFacebook",

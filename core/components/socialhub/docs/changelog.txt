@@ -1,5 +1,9 @@
 Changelog for SocialHub.
 
+SocialHub 2.0.5
+==============
+- Add RefreshToken snippet
+
 SocialHub 2.0.0
 ==============
 - Initial release.
